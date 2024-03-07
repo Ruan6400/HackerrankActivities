@@ -16,5 +16,6 @@ function Horario(Hora){
                 for(let i= 2;i< Hora.length-2;i++){
                     novaHora+=Hora[i];
                 }
-                Hora24=novaHora;     
+                Hora24=novaHora;
+                return Hora24;
 }
