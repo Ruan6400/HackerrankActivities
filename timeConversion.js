@@ -19,3 +19,5 @@ function Horario(Hora){
     Hora24=novaHora;
     return Hora24;   
 }
+
+///o horario deve vir no formato HH:MM:SSPM ou HH:MM:SSAM
