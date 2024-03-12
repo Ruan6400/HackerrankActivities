@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head lang="pt-br">
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+    <body>
+            <input type="text" maxlength="3" size="5" id="Texto">
+            <button onclick="Rodar()">confirmar</button><br id="Butao">
+        <script>
+            var Texto = document.getElementById("Texto");
+            var Botao = document.getElementById("Butao");
+            var Linha = [];
+            var Matriz = [];
+            
+            function Rodar(){
+                let Caixa = document.getElementById("Texto");
+                let Numero = Caixa.value;
+                if(Numero == ""||isNaN(Numero)){
+                    Numero = 0;
+                }
+                CriaCaixa(Numero);
+                let Excluir = document.getElementById("txtResult");
+                if(Excluir != null){
+                    Excluir.remove();
+                }
+            }
+            
+            function CriaCaixa(quant){
+                let Elemento = Botao;
+                for(let i=0;i < quant;i++){
+                    for(let j=0; j < quant;j++){
+                        Elemento.insertAdjacentHTML("afterend",'<input type="text" maxlength="3" size="5" id="Texto'+i+j+'">');
+                        Elemento = document.getElementById("Texto"+i+j);
+                    }
+                    Elemento.insertAdjacentHTML("afterend",'<br id="br'+i+'">');
+                    Elemento = document.getElementById("br"+i);
+                }
+                if(quant > 0){
+                    Elemento.insertAdjacentHTML('afterend','<button id="btnResult" onclick="CalculaMatriz()">Calcular</button><br id="Result">');
+                }
+            }
+            
+            
+            function CalculaMatriz(){
+                let MatSize = Texto.value;
+                let Celula;
+                if(MatSize == ""||isNaN(MatSize)){
+                    MatSize = 0;
+                }
+                for(let i=0;i < MatSize;i++){
+                    for(let j=0;j < MatSize;j++){
+                        Celula = document.getElementById("Texto"+i+j);
+                        let Valor = Celula.value;
+                        if(Valor == ""||isNaN(Valor)){
+                            Valor = 0;
+                        }
+                        Linha.push(Valor);
+                    }
+                    Matriz.push(Linha);
+                    Linha = [];
+                }
+                let Soma = 0;
+                for(let i=0;i < MatSize;i++){
+                    console.log(Soma+" + "+Matriz[i][i]);
+                    Soma-=-1*(Matriz[i][i]);
+                    console.log(Soma);
+                }
+                for(let i=0;i < MatSize;i++){
+                    console.log(Soma+" - "+Matriz[i][MatSize-1-i]);
+                    Soma-=Matriz[i][MatSize-1-i];
+                    console.log(Soma);
+                }
+                Soma = Math.abs(Soma);
+                let Resultado = document.getElementById("Result");
+                Resultado.insertAdjacentHTML('afterend','<h1 id="txtResult">'+Soma+'</h1>');
+                for(let i=MatSize-1;i > -1;i--){
+                    for(let j=MatSize-1;j > -1;j--){
+                        let Excluir=document.getElementById("Texto"+i+j);
+                        Excluir.remove();
+                    }
+                    let Excluir = document.getElementById("br"+i);
+                    Excluir.remove();
+                }
+                let Excluir = document.getElementById("btnResult");
+                Excluir.remove();
+                Excluir = document.getElementById("Result");
+                Excluir.remove();
+                Matriz = [];
+                Texto.value = "";
+            }
+        </script>
+    </body>
+</html>
