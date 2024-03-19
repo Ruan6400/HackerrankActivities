@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head lang="pt-br">
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <style>
+            table,tr,td,th{
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <script>
+            let Alunos = [
+            {"Aluno": "Ruan","ra":"1234567890", "notaP1":10, "notaP2":8.75}
+            ,{"Aluno": "Natalia","ra":"1234567890", "notaP1":"7.8", "notaP2":7}
+            ,{"Aluno": "Lais","ra":"1234567890", "notaP1":"8", "notaP2":7.5}
+            ,{"Aluno": "Geovani","ra":"1234567890", "notaP1":"5", "notaP2":6.2}
+            ,{"Aluno": "Dennis","ra":"1234567890", "notaP1":"7", "notaP2":10}
+            ,{"Aluno": "Sofia","ra":"12468999690", "notaP1":"9.5", "notaP2":5}
+            ,{"Aluno": "Pedro","ra":"14688777890", "notaP1":"1.3", "notaP2":4}];
+           function TabelaNotas(Alunos){
+               let Tabela = "<table><thead><tr>"
+               +"<th>Aluno</th><th>RA</th><th>P1</th><th>P2</th><th>Media</th>"
+               +"</tr><tbody>";
+               let MediaP1 = 0;
+               let MediaP2 = 0;
+               let MediaAluno = 0;
+               let Aprovados = 0;
+               let Reprovados = 0;
+               for(let i=0;i < Alunos.length;i++){
+                   Tabela+="<tr>";
+                   for(let idx in Alunos[i]){
+                       if(idx[0] == "n"){ 
+                           Tabela += '<td class="nota">';
+                           if(idx[5] == 1){MediaP1-=-1*(Alunos[i][idx]);}
+                           else{MediaP2-=-1*(Alunos[i][idx]);}
+                       }
+                       else{
+                           Tabela += '<td>';
+                       }
+                       Tabela +=Alunos[i][idx]+"</td>";
+                   }
+                   MediaAluno = (Alunos[i]["notaP1"]-(-1*Alunos[i]["notaP2"]))/2;
+                   if(MediaAluno >= 6) {Aprovados++;}
+                   else{Reprovados++;}
+                   Tabela+='<td class="nota">'+MediaAluno+'</td>';
+                   Tabela+="</tr>";
+               }
+               MediaP1= MediaP1/Alunos.length;
+               MediaP2= MediaP2/Alunos.length;
+               Tabela+='<tr><td>Total</td><td></td><td class="nota">'+MediaP1.toFixed(2)+'</td><td class="nota">'+MediaP2.toFixed(2)+'</td><td></td><tr></tr>';
+               Tabela+='<tr><td>Aprovados</td><td>'+Aprovados+'</td><td></td><td></td><td></td><tr></tr>';
+               Tabela+='<tr><td>Reprovados</td><td>'+Reprovados+'</td><td></td><td></td><td></td><tr></tr></tbody></table>';
+               document.write(Tabela);
+               let Notas = document.getElementsByClassName("nota");
+               for(let i=0;i < Notas.length;i++){
+                   if(Notas[i].innerHTML >= 6){
+                       Notas[i].style.color = "#00f";
+                   }else{
+                       Notas[i].style.color = "#f00";
+                   }
+               }
+           }
+           TabelaNotas(Alunos);
+           
+        </script>
+    </body>
+</html>
